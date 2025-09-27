@@ -1,0 +1,18 @@
+{
+  "typeCheckingMode": "basic",
+  "stubPath": "typings",
+  "reportMissingTypeStubs": "none",
+  "reportMissingModuleSource": "none",
+  "reportUnknownMemberType": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnknownParameterType": "none",
+  "reportUnknownArgumentType": "none",
+  "reportAttributeAccessIssue": "none",
+  "reportUnusedImport": true,
+  "reportMissingImports": true,
+  "venvPath": ".",
+  "venv": ".venv",
+  "executionEnvironments": [
+    { "root": ".", "extraPaths": ["typings"] }
+  ]
+}

@@ -1,0 +1,48 @@
+[MASTER]
+ignore=__pycache__,build,dist,typings
+jobs=0
+extension-pkg-allow-list=PySide6
+recursive=yes
+
+[MESSAGES CONTROL]
+disable=
+    missing-docstring,
+    too-few-public-methods,
+    duplicate-code,
+    import-error,
+    no-name-in-module
+
+[REPORTS]
+output-format=colorized
+score=yes
+
+[BASIC]
+good-names=i,j,k,db,_,id,app
+max-line-length=150
+docstring-min-length=8
+
+[FORMAT]
+max-module-lines=800
+
+[TYPECHECK]
+ignored-modules=jdatetime,PySide6,PySide6.QtWidgets,PySide6.QtCore,PySide6.QtGui
+
+[DESIGN]
+max-args=7
+max-attributes=15
+max-locals=25
+max-returns=10
+max-branches=25
+max-statements=100
+
+[SIMILARITIES]
+min-similarity-lines=8
+ignore-comments=yes
+ignore-docstrings=yes
+ignore-imports=yes
+
+[STRING]
+check-str-concat-over-line-jumps=yes
+
+[MISCELLANEOUS]
+notes=FIXME,XXX,TODO

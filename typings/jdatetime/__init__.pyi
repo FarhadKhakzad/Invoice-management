@@ -1,0 +1,13 @@
+# Minimal type stubs for jdatetime used in this project
+# This is NOT a complete stub – only what we call.
+from typing import Optional, Any
+from datetime import datetime as _GDateTime
+
+class datetime:
+    @staticmethod
+    def now(tz: Optional[Any] = ...) -> 'datetime': ...
+    def strftime(self, format: str) -> str: ...
+    # تبدیل به datetime استاندارد پایتون
+    def togregorian(self) -> _GDateTime: ...
+    @staticmethod
+    def fromgregorian(datetime: _GDateTime) -> 'datetime': ...

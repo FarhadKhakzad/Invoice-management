@@ -1,0 +1,63 @@
+# -----------------------------
+# Python / General
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+.env/
+.env*/
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+.wheelhouse/
+
+# PyInstaller build artifacts
+*.spec
+# Keep the canonical spec file if needed, uncomment next line and remove the previous pattern
+#!invoice_manager.spec
+#!invoice manager.spec
+
+# Logs / Coverage / Test cache
+*.log
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.coverage
+coverage.xml
+
+# Type checker / tooling caches
+.mypy_cache/
+.pyright/
+.pyre/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node / Front-end (future-proof)
+node_modules/
+
+# Local databases / runtime artifacts
+invoices.db
+
+# QRC compiled caches (keep the .qrc and generated .py tracked if desired)
+#*.qrc.dep
+
+# Misc
+*.tmp
+*.bak
+

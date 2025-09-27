@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>search_icon.png</file>
+    <file>trash_icon.png</file>
+  </qresource>
+</RCC>

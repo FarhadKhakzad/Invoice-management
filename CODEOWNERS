@@ -1,0 +1,8 @@
+# CODEOWNERS: تعریف مالکیت فایل‌ها/پوشه‌ها برای بررسی خودکار PR ها
+# فرمت: هر خط مسیر و بعد @username یا تیم
+# مثال‌ها:
+# * @your-user
+# docs/ @doc-team
+# tests/ @qa-team
+
+* @your-github-username
