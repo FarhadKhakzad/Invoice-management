@@ -76,7 +76,7 @@ jobs:
           pip install -r requirements.txt
       - name: Build executable (PyInstaller)
         run: |
-          pyinstaller "invoice_manager.spec" --clean --noconfirm
+          pyinstaller "invoice_management.spec" --clean --noconfirm || pyinstaller "invoice_manager.spec" --clean --noconfirm
       - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:

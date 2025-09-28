@@ -21,9 +21,7 @@ dist/
 
 # PyInstaller build artifacts
 *.spec
-# Keep the canonical spec file if needed, uncomment next line and remove the previous pattern
-#!invoice_manager.spec
-#!invoice manager.spec
+!invoice_management.spec
 
 # Logs / Coverage / Test cache
 *.log

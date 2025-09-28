@@ -1,4 +1,4 @@
-# Invoice Manager
+# Invoice management
 
 سیستم ساده مدیریت ورود/خروج فاکتور با رابط کاربری PySide6 و ذخیره سازی SQLite (تاریخ جلالی با jdatetime).
 
@@ -54,7 +54,7 @@ Artifacts (خروجی‌ها) پس از اجرا در تب Actions قابل دا
 
 ## ساخت exe محلی
 ```bash
-.venv\\Scripts\\pyinstaller invoice_manager.spec --clean --noconfirm
+.venv\\Scripts\\pyinstaller invoice_management.spec --clean --noconfirm
 ```
 
 ## مجوز
