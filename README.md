@@ -1,5 +1,9 @@
 # Invoice management
 
+[![CI](https://github.com/FarhadKhakzad/invoice-management/actions/workflows/ci.yml/badge.svg)](https://github.com/FarhadKhakzad/invoice-management/actions/workflows/ci.yml)
+
+> Badge بالا بعد از اولین push و اجرای workflow به صورت خودکار وضعیت (passing/failing) را نمایش می‌دهد.
+
 سیستم ساده مدیریت ورود/خروج فاکتور با رابط کاربری PySide6 و ذخیره سازی SQLite (تاریخ جلالی با jdatetime).
 
 ## ویژگی‌ها
