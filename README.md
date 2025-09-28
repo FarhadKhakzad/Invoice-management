@@ -4,6 +4,9 @@
 
 > Badge بالا بعد از اولین push و اجرای workflow به صورت خودکار وضعیت (passing/failing) را نمایش می‌دهد.
 
+<!-- پس از ایجاد تگ v0.1.0 این badge نسخه را می‌توان فعال کرد (مثال shields.io) -->
+<!-- ![Version](https://img.shields.io/github/v/tag/FarhadKhakzad/invoice-management?label=version&sort=semver) -->
+
 سیستم ساده مدیریت ورود/خروج فاکتور با رابط کاربری PySide6 و ذخیره سازی SQLite (تاریخ جلالی با jdatetime).
 
 ## ویژگی‌ها
