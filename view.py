@@ -44,7 +44,8 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
     # ---------------------- setup sections ----------------------
     def _base_setup(self) -> None:
         self.setWindowTitle("مدیریت فاکتورها")
-        self.setStyleSheet("background-color: white")
+        # اعمال پس‌زمینه تیره کلی (تم دارک به صورت inline)
+        self.setStyleSheet("background-color: #121212;")
         self.main_widget = QWidget()
         self.setCentralWidget(self.main_widget)
         self.main_vertical_layout = QVBoxLayout()
@@ -53,34 +54,42 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
     def _setup_top_bar(self) -> None:
         self.first_horizontal_layout = QHBoxLayout()
         self.first_horizontal_layout.setContentsMargins(0, 0, 0, 0)
-        self.first_horizontal_layout.setSpacing(5)
+        self.first_horizontal_layout.setSpacing(15)
         self.left_spacer = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         self.first_horizontal_layout.addItem(self.left_spacer)
         self.search_button = QPushButton()
-        self.search_button.setIcon(QIcon(":/icons/search_icon.png"))
+        self.search_button.setObjectName("searchButton")
+        self.search_button.setIcon(QIcon(":/icons/search.png"))
         self.search_button.setIconSize(QSize(32, 40))
-        self.search_button.setStyleSheet("background-color: white; border: none;")
+        self.search_button.setStyleSheet(
+            "QPushButton { background:#1e1e1e; color:#f5f5f5; border:2px solid #444; border-radius:20px; padding:4px 14px; font-size:18px; }"
+            "QPushButton:hover { border-color:#777; }"
+            "QPushButton:pressed { border-color:#999; }"
+        )
         self.first_horizontal_layout.addWidget(self.search_button)
         self.search_button.clicked.connect(self.handle_search)  # type: ignore[arg-type]
         self.barcode_input = QLineEdit()
+        self.barcode_input.setObjectName("barcodeInput")
         self.barcode_input.setMinimumSize(300, 40)
         self.barcode_input.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         self.barcode_input.setPlaceholderText("بارکد فاکتور را اسکن کنید")
         self.barcode_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.barcode_input.setStyleSheet(
-            (
-                "QLineEdit { background-color: white; color: black; font-size: 20px; "
-                "border: 2px solid black; border-radius: 20px; padding: 0; selection-background-color: white; }"
-                "QLineEdit:focus { border: 2px solid black; background-color: white; }"
-                "QLineEdit:hover { border: 2px solid grey; }"
-            )
+            "QLineEdit { background:#1e1e1e; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px; padding:2px 8px; }"
+            "QLineEdit:hover { border-color:#777; }"
+            "QLineEdit:focus { border-color:#999; }"
         )
         self.first_horizontal_layout.addWidget(self.barcode_input)
         self.barcode_input.returnPressed.connect(self.handle_barcode)  # type: ignore[arg-type]
         self.delete_button = QPushButton()
-        self.delete_button.setIcon(QIcon(":/icons/trash_icon.png"))
+        self.delete_button.setObjectName("deleteButton")
+        self.delete_button.setIcon(QIcon(":/icons/recycle-bin.png"))
         self.delete_button.setIconSize(QSize(32, 40))
-        self.delete_button.setStyleSheet("background-color: white; border: none;")
+        self.delete_button.setStyleSheet(
+            "QPushButton { background:#1e1e1e; color:#f5f5f5; border:2px solid #444; border-radius:20px; padding:4px 14px; font-size:18px; }"
+            "QPushButton:hover { border-color:#777; }"
+            "QPushButton:pressed { border-color:#999; }"
+        )
         self.first_horizontal_layout.addWidget(self.delete_button)
         self.delete_button.clicked.connect(self.handle_delete)  # type: ignore[arg-type]
         self.right_spacer = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -89,10 +98,11 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
 
     def _setup_message_box(self) -> None:
         self.message_box = QLabel()
+        self.message_box.setObjectName("messageBox")
         self.message_box.setMinimumSize(0, 40)
         self.message_box.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.message_box.setStyleSheet(
-            "background-color: white; color: black; font-size: 20px; border: 2px solid black; border-radius: 20px; padding: 0;"
+            "background:#1e1e1e; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
         )
         self.main_vertical_layout.addWidget(self.message_box)
         self.message_timer = QTimer()
@@ -102,22 +112,23 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
     def _setup_mode_and_counter(self) -> None:
         self.second_horizontal_layout = QHBoxLayout()
         self.exit_mode = QPushButton("حالت خروج", self)
+        self.exit_mode.setObjectName("exitModeButton")
         self.exit_mode.setCheckable(True)
         self.exit_mode.setMinimumSize(0, 40)
         self.exit_mode.setStyleSheet(
-            """
-            QPushButton { background-color: white; color: black; font-size: 20px; border: 2px solid black; border-radius: 20px; }
-            QPushButton:checked { background-color: #06f500; color: black; border: 2px solid black; }
-            """
+            "QPushButton { background:#1e1e1e; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px; }"
+            "QPushButton:checked { background:#1faa00; color:#f5f5f5; border:2px solid #444; }"
+            "QPushButton:hover { border-color:#777; }"
         )
         self.second_horizontal_layout.addWidget(self.exit_mode)
         self.count_invoice_enter = QLabel()
+        self.count_invoice_enter.setObjectName("countLabel")
         invoice_count = self.controller.get_count_invoice_enter()
         self.count_invoice_enter.setText(f"ورودی: {invoice_count}")
         self.count_invoice_enter.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.count_invoice_enter.setFixedHeight(40)
         self.count_invoice_enter.setStyleSheet(
-            "background-color: white; color: black; font-size: 20px; border: 2px solid black; border-radius: 20px; padding: 0;"
+            "background:#1e1e1e; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px; padding:0 10px;"
         )
         self.second_horizontal_layout.addWidget(self.count_invoice_enter)
         self.main_vertical_layout.addLayout(self.second_horizontal_layout)
@@ -126,6 +137,7 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
         self.third_horizontal_layout = QHBoxLayout()
         # weekly table
         self.weekly_table = QTableWidget()
+        self.weekly_table.setObjectName("weeklyTable")
         self.weekly_table.setColumnCount(3)
         self.weekly_table.setRowCount(7)
         self.weekly_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
@@ -136,18 +148,16 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
         self.weekly_table.setAlternatingRowColors(True)
         self.weekly_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.weekly_table.setStyleSheet(
-            (
-                "QTableWidget { background-color: white; border: 2px solid black; border-radius: 20px; "
-                "font-size: 20px; color: black; gridline-color: transparent; }"
-                "QHeaderView::section { background-color: white; color: black; font-size: 20px; "
-                "border-bottom: 2px solid black; }"
-                "QTableWidget::item { border: none; padding: 10px; }"
-                "QTableWidget::item:alternate { background-color: #bfbfbf; }"
-            )
+            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; font-size:16px; color:#f5f5f5; gridline-color:transparent; }"
+            "QHeaderView::section { background:#1e1e1e; color:#f5f5f5; font-size:16px; border-bottom:2px solid #444; }"
+            "QTableWidget::item { border:none; padding:10px; }"
+            "QTableWidget::item:alternate { background:#242424; }"
+            "QTableWidget::item:selected { background:#274a2a; }"
         )
         self.third_horizontal_layout.addWidget(self.weekly_table)
         # invoice table
         self.invoice_table = QTableWidget()
+        self.invoice_table.setObjectName("invoiceTable")
         self.invoice_table.setColumnCount(4)
         self.invoice_table.setHorizontalHeaderLabels(["خروج", "ساعت", "تاریخ", "شماره فاکتور"])
         self.invoice_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
@@ -157,21 +167,18 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
         self.invoice_table.setAlternatingRowColors(True)
         self.invoice_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.invoice_table.setStyleSheet(
-            (
-                "QTableWidget { background-color: white; border: 2px solid black; border-radius: 20px; "
-                "font-size: 20px; color: black; gridline-color: transparent; }"
-                "QHeaderView::section { background-color: white; color: black; font-size: 20px; "
-                "border-bottom: 2px solid black; }"
-                "QTableWidget::item { border: none; padding: 10px; }"
-                "QTableWidget::item:selected { background-color: #d1ffd6; color: black; }"
-                "QTableWidget::item:alternate { background-color: #bfbfbf; }"
-            )
+            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; font-size:16px; color:#f5f5f5; gridline-color:transparent; }"
+            "QHeaderView::section { background:#1e1e1e; color:#f5f5f5; font-size:16px; border-bottom:2px solid #444; }"
+            "QTableWidget::item { border:none; padding:10px; }"
+            "QTableWidget::item:alternate { background:#242424; }"
+            "QTableWidget::item:selected { background:#274a2a; }"
         )
         self.third_horizontal_layout.addWidget(self.invoice_table)
         self.main_vertical_layout.addLayout(self.third_horizontal_layout)
 
     def _setup_monthly_table(self) -> None:
         self.monthly_table = QTableWidget()
+        self.monthly_table.setObjectName("monthlyTable")
         self.monthly_table.setRowCount(2)
         self.monthly_table.setColumnCount(31)
         self.monthly_table.setVerticalHeaderLabels(["تاریخ", "تعداد"])
@@ -184,18 +191,14 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
             count_item = QTableWidgetItem("")
             count_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.monthly_table.setItem(1, col, count_item)
-        self.monthly_table.setStyleSheet(
-            (
-                "QTableWidget { background-color: white; border: 2px solid black; border-radius: 20px; "
-                "font-size: 14px; color: black; gridline-color: transparent; }"
-                "QHeaderView::section { background-color: white; color: black; font-size: 15px; "
-                "border-bottom: 2px solid black; }"
-                "QTableWidget::item { border: none; padding: 10px; }"
-                "QTableWidget::item:selected { background-color: #d1ffd6; color: black; }"
-                "QTableWidget::item:alternate { background-color: #bfbfbf; }"
-            )
-        )
         self.monthly_table.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        self.monthly_table.setStyleSheet(
+            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; font-size:12px; color:#f5f5f5; gridline-color:transparent; }"
+            "QHeaderView::section { background:#1e1e1e; color:#f5f5f5; font-size:14px; border-bottom:2px solid #444; }"
+            "QTableWidget::item { border:none; padding:6px; }"
+            "QTableWidget::item:alternate { background:#242424; }"
+            "QTableWidget::item:selected { background:#274a2a; }"
+        )
         self.monthly_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.monthly_table.horizontalHeader().setVisible(False)
         self.monthly_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
@@ -220,36 +223,18 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
         count = self.controller.get_count_invoice_enter()
         self.count_invoice_enter.setText(f"ورودی: {count}")
 
+        # تعیین استایل پیام بر اساس نتیجه (دارک تم inline)
         if "✅" in message:
             self.message_box.setStyleSheet(
-                """
-                background-color: #06f500;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-                padding: 0px 0px;
-                """
+                "background:#1faa00; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
             )
         elif "❌" in message:
-            self.message_box.setStyleSheet("""
-                background-color: red;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-                padding: 0px 0px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#d32f2f; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
         else:
             self.message_box.setStyleSheet(
-                """
-                background-color: #fffd3d;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-                padding: 0px 0px;
-                """
+                "background:#c9a800; color:#121212; font-size:20px; border:2px solid #444; border-radius:20px;"
             )
         self.update_invoice_table()
         self.update_weekly_table()
@@ -260,14 +245,9 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
     # پاک کردن کادر پیام
     def clear_message_box(self):
         self.message_box.setText("")
-        self.message_box.setStyleSheet("""
-            background-color: white;
-            color: black;
-            font-size: 20px;
-            border: 2px solid black;
-            border-radius: 20px;
-            padding: 0px 0px;
-        """)
+        self.message_box.setStyleSheet(
+            "background:#1e1e1e; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+        )
 
     # به روز رسانی جدول فاکتور ها
     def update_invoice_table(self):
@@ -379,34 +359,26 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
 
         if not invoice_number.isdigit():
             self.message_box.setText("شماره فاکتور نامعتبر است ❌")
-            self.message_box.setStyleSheet("""
-                background-color: red;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#d32f2f; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
             return
 
         result = self.controller.delete_invoice(invoice_number)
         self.message_box.setText(result)
 
         if "✅" in result:
-            self.message_box.setStyleSheet("""
-                background-color: #06f500;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#1faa00; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
+        elif "❌" in result:
+            self.message_box.setStyleSheet(
+                "background:#d32f2f; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
         else:
-            self.message_box.setStyleSheet("""
-                background-color: red;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#c9a800; color:#121212; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
 
         # به‌روزرسانی جداول
         self.update_invoice_table()
@@ -424,13 +396,9 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
 
         if not invoice_number.isdigit():
             self.message_box.setText("شماره فاکتور نامعتبر است ❌")
-            self.message_box.setStyleSheet("""
-                background-color: red;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#d32f2f; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
             return
 
         invoice_details = self.controller.db.get_invoice_info(invoice_number)
@@ -441,29 +409,24 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
             else:
                 self.message_box.setText(f"فاکتور {invoice_number} ({date_enter} - {time_enter}) {first_status}")
 
-            self.message_box.setStyleSheet("""
-                background-color: #fffd3d;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#c9a800; color:#121212; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
 
         else:
             self.message_box.setText(f"فاکتور {invoice_number} یافت نشد ❌")
-            self.message_box.setStyleSheet("""
-                background-color: red;
-                color: black;
-                font-size: 20px;
-                border: 2px solid black;
-                border-radius: 20px;
-            """)
+            self.message_box.setStyleSheet(
+                "background:#d32f2f; color:#f5f5f5; font-size:20px; border:2px solid #444; border-radius:20px;"
+            )
 
         self.message_timer.start(10000)
         self.barcode_input.clear()
         self.barcode_input.setFocus()
 
+
+
 # اجرای برنامه
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
