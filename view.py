@@ -148,7 +148,8 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
         self.weekly_table.setAlternatingRowColors(True)
         self.weekly_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.weekly_table.setStyleSheet(
-            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; font-size:16px; color:#f5f5f5; gridline-color:transparent; }"
+            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; "
+            "font-size:16px; color:#f5f5f5; gridline-color:transparent; }"
             "QHeaderView::section { background:#1e1e1e; color:#f5f5f5; font-size:16px; border-bottom:2px solid #444; }"
             "QTableWidget::item { border:none; padding:10px; }"
             "QTableWidget::item:alternate { background:#242424; }"
@@ -167,7 +168,8 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
         self.invoice_table.setAlternatingRowColors(True)
         self.invoice_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.invoice_table.setStyleSheet(
-            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; font-size:16px; color:#f5f5f5; gridline-color:transparent; }"
+            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; "
+            "font-size:16px; color:#f5f5f5; gridline-color:transparent; }"
             "QHeaderView::section { background:#1e1e1e; color:#f5f5f5; font-size:16px; border-bottom:2px solid #444; }"
             "QTableWidget::item { border:none; padding:10px; }"
             "QTableWidget::item:alternate { background:#242424; }"
@@ -193,7 +195,8 @@ class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
             self.monthly_table.setItem(1, col, count_item)
         self.monthly_table.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         self.monthly_table.setStyleSheet(
-            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; font-size:12px; color:#f5f5f5; gridline-color:transparent; }"
+            "QTableWidget { background:#1e1e1e; border:2px solid #444; border-radius:20px; "
+            "font-size:12px; color:#f5f5f5; gridline-color:transparent; }"
             "QHeaderView::section { background:#1e1e1e; color:#f5f5f5; font-size:14px; border-bottom:2px solid #444; }"
             "QTableWidget::item { border:none; padding:6px; }"
             "QTableWidget::item:alternate { background:#242424; }"
