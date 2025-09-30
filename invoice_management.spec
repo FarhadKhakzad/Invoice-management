@@ -34,7 +34,11 @@ import pathlib
 # Hidden imports (jdatetime dynamically imports modules)
 hidden = collect_submodules('jdatetime')
 
-BASE_DIR = pathlib.Path(__file__).parent.resolve()
+BASE_DIR = (
+    pathlib.Path(__file__).parent.resolve()
+    if "__file__" in globals()
+    else pathlib.Path.cwd()
+)
 # Optional icon (uncomment and ensure file exists)
 # ICON_PATH = str(BASE_DIR / 'assets' / 'app.ico')
 ICON_PATH = None  # placeholder (no icon supplied yet)
