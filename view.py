@@ -25,6 +25,7 @@ from PySide6.QtGui import QColor, QIcon
 import jdatetime
 from controller import Controller
 import resources_rc  # pylint: disable=unused-import  # لازم برای ثبت ریسورس ها
+_ = resources_rc
 
 # کلاس پنجره اصلی
 class MainWindow(QMainWindow):  # pylint: disable=too-many-instance-attributes
